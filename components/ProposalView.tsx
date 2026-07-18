@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { decodeProposal, totalProposal } from "@/lib/proposal";
+import { normalizeUrl } from "@/lib/url";
 
 function formatDate(dateStr: string) {
   if (!dateStr) return "";
@@ -57,7 +58,7 @@ export function ProposalView({ d }: { d?: string }) {
               {p.categoria && <p className="text-sm text-inkSoft">{p.categoria}</p>}
               {p.link && (
                 <a
-                  href={p.link}
+                  href={normalizeUrl(p.link)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-violet hover:underline"

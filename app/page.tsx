@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Suspense } from "react";
 import { ConfettiField } from "@/components/Confetti";
 import { Reveal } from "@/components/Reveal";
 import { QuoteRequestForm } from "@/components/QuoteRequestForm";
@@ -174,7 +175,9 @@ export default function HomePage() {
             para a tua festa.
           </p>
           <div className="mt-7">
-            <QuoteRequestForm />
+            <Suspense fallback={<div className="h-64" />}>
+              <QuoteRequestForm />
+            </Suspense>
           </div>
         </Reveal>
       </section>

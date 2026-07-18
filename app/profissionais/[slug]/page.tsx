@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/Reveal";
 import { BlogArticleContent } from "@/components/BlogArticleContent";
+import { PhotoGallery } from "@/components/PhotoGallery";
 import { getAllProfileSlugs, getProfileBySlug, extractYouTubeId } from "@/lib/professionals";
 
 const SITE_URL = "https://www.yuppi.pt";
@@ -57,6 +58,9 @@ export default async function ProfissionalPage({
   const emailHref = `mailto:hello@yuppi.pt?subject=${encodeURIComponent(
     `Pedido de informações — ${profile.nome}`
   )}`;
+  const whatsappHref = `https://wa.me/351922008673?text=${encodeURIComponent(
+    `Olá! Vi o perfil de ${profile.nome} na Yuppi e gostava de mais informações.`
+  )}`;
 
   return (
     <>
@@ -106,18 +110,8 @@ export default async function ProfissionalPage({
 
           {profile.fotos && profile.fotos.length > 0 && (
             <Reveal delay={130}>
-              <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {profile.fotos.map((foto, i) => (
-                  <div key={i} className="relative aspect-square overflow-hidden rounded-xl2 shadow-card">
-                    <Image
-                      src={foto}
-                      alt={`${profile.nome} — foto ${i + 1}`}
-                      fill
-                      sizes="(min-width: 640px) 33vw, 50vw"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
+              <div className="mt-10">
+                <PhotoGallery fotos={profile.fotos} nome={profile.nome} />
               </div>
             </Reveal>
           )}
@@ -137,20 +131,25 @@ export default async function ProfissionalPage({
           )}
 
           <Reveal delay={150}>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
-                href="/#pedir-orcamento"
+                href={`/?profissional=${profile.slug}#pedir-orcamento`}
                 className="rounded-full bg-violet px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition-transform hover:scale-[1.03] hover:bg-violet-dark"
               >
                 Pedir Orçamento
               </Link>
               <a
-                href={emailHref}
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-full border border-ink/15 px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-ink/30 hover:bg-canvasSoft"
               >
-                Contactar por Email
+                WhatsApp
               </a>
             </div>
+            <a href={emailHref} className="mt-4 inline-block text-sm text-inkSoft underline hover:text-ink">
+              ou contactar por email
+            </a>
           </Reveal>
         </div>
       </article>

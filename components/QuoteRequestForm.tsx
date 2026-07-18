@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { submitForm } from "@/lib/submitForm";
 
 const TIPOS = ["Animadores", "Mágicos", "Mascotes", "Pinturas Faciais", "Modelagem de Balões", "Insufláveis", "Decoração", "Fotografia", "DJ / Música", "Pacote / Vários Serviços"];
@@ -12,12 +13,13 @@ const WHATSAPP_NUMBER = "351922008673";
 const inputClass =
   "w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-sm text-ink placeholder:text-inkSoft/50 focus:border-violet";
 
-function buildWhatsAppMessage(formData: FormData) {
+function buildWhatsAppMessage(formData: FormData, profissionalRef: string | null) {
   const get = (key: string) => (formData.get(key) as string)?.trim();
 
   const lines = [
     "Olá! Gostava de pedir um orçamento para uma festa infantil.",
     "",
+    profissionalRef && `Perfil de referência: ${profissionalRef}`,
     get("nome") && `Nome: ${get("nome")}`,
     get("telefone") && `Telefone: ${get("telefone")}`,
     get("cidade") && `Cidade: ${get("cidade")}`,
@@ -34,6 +36,8 @@ function buildWhatsAppMessage(formData: FormData) {
 export function QuoteRequestForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const formRef = useRef<HTMLFormElement>(null);
+  const searchParams = useSearchParams();
+  const profissionalRef = searchParams.get("profissional");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -50,7 +54,7 @@ export function QuoteRequestForm() {
   function handleWhatsApp() {
     if (!formRef.current) return;
     const formData = new FormData(formRef.current);
-    const message = buildWhatsAppMessage(formData);
+    const message = buildWhatsAppMessage(formData, profissionalRef);
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
   }
@@ -66,6 +70,14 @@ export function QuoteRequestForm() {
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 text-left">
+      {profissionalRef && (
+        <>
+          <input type="hidden" name="profissional_referencia" value={profissionalRef} />
+          <p className="rounded-lg bg-teal-light px-4 py-2 text-xs text-ink">
+            A pedir orçamento com referência ao perfil: <strong>{profissionalRef}</strong>
+          </p>
+        </>
+      )}
       <div className="grid gap-4 sm:grid-cols-2">
         <input name="nome" required placeholder="O teu nome" className={inputClass} />
         <input name="email" required type="email" placeholder="o.teu@email.com" className={inputClass} />
