@@ -6,6 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { BlogArticleContent } from "@/components/BlogArticleContent";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { getAllProfileSlugs, getProfileBySlug, extractYouTubeId } from "@/lib/professionals";
+import { SHOW_PROFISSIONAIS } from "@/lib/featureFlags";
 
 const SITE_URL = "https://www.yuppi.pt";
 
@@ -32,6 +33,7 @@ export async function generateMetadata({
       url: `${SITE_URL}/profissionais/${profile.slug}`,
       images: profile.coverImage ? [{ url: profile.coverImage, width: 1200, height: 1200 }] : undefined,
     },
+    robots: SHOW_PROFISSIONAIS ? undefined : { index: false, follow: false },
   };
 }
 

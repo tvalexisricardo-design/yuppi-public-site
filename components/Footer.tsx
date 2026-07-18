@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SocialLinks } from "@/components/SocialLinks";
+import { SHOW_PROFISSIONAIS } from "@/lib/featureFlags";
 
 const categories = ["Animadores", "Mágicos", "Mascotes", "Pinturas Faciais", "Modelagem de Balões", "Insufláveis", "Decoração", "Fotografia", "DJ / Música"];
 
@@ -43,7 +44,9 @@ export function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-inkSoft">
               <li><Link href="/#como-funciona" className="hover:text-ink">Como funciona</Link></li>
               <li><Link href="/categorias" className="hover:text-ink">Categorias</Link></li>
-              <li><Link href="/profissionais" className="hover:text-ink">Profissionais</Link></li>
+              {SHOW_PROFISSIONAIS && (
+                <li><Link href="/profissionais" className="hover:text-ink">Profissionais</Link></li>
+              )}
               <li><Link href="/blog" className="hover:text-ink">Blog</Link></li>
               <li><Link href="/#pedir-orcamento" className="hover:text-ink">Pedir orçamento</Link></li>
               <li><Link href="/contactos" className="hover:text-ink">Contactos</Link></li>

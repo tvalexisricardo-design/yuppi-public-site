@@ -4,11 +4,13 @@ import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { ConfettiField } from "@/components/Confetti";
 import { getAllProfiles } from "@/lib/professionals";
+import { SHOW_PROFISSIONAIS } from "@/lib/featureFlags";
 
 export const metadata: Metadata = {
   title: "Profissionais | Yuppi",
   description: "Conhece os profissionais de festas infantis disponíveis na Yuppi.",
   alternates: { canonical: "/profissionais" },
+  robots: SHOW_PROFISSIONAIS ? undefined : { index: false, follow: false },
 };
 
 export default function ProfissionaisIndexPage() {
