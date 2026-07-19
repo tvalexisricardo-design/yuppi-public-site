@@ -58,9 +58,6 @@ export default async function ProfissionalPage({
   };
 
   const youtubeId = profile.youtube ? extractYouTubeId(profile.youtube) : null;
-  const emailHref = `mailto:hello@yuppi.pt?subject=${encodeURIComponent(
-    `Pedido de informações — ${profile.nome}`
-  )}`;
   const whatsappHref = `https://wa.me/351922008673?text=${encodeURIComponent(
     `Olá! Vi o perfil de ${profile.nome} na Yuppi e gostava de mais informações.`
   )}`;
@@ -160,9 +157,6 @@ export default async function ProfissionalPage({
                 WhatsApp
               </a>
             </div>
-            <a href={emailHref} className="mt-4 inline-block text-sm text-inkSoft underline hover:text-ink">
-              ou contactar por email
-            </a>
           </Reveal>
         </div>
       </article>
