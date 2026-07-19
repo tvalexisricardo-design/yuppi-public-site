@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
-import { getAllProfiles } from "@/lib/professionals";
+import { getAllProfiles, getAllCategoryCityCombos } from "@/lib/professionals";
 import { SHOW_PROFISSIONAIS } from "@/lib/featureFlags";
 
 const SITE_URL = "https://www.yuppi.pt";
@@ -8,6 +8,7 @@ const SITE_URL = "https://www.yuppi.pt";
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
   const profiles = getAllProfiles();
+  const combos = getAllCategoryCityCombos();
 
   return [
     {
@@ -55,14 +56,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.7,
           },
           ...profiles.map((p) => ({
-            url: `${SITE_URL}/profissionais/${p.slug}`,
+            url: `${SITE_URL}/profissionais/perfil/${p.slug}`,
             lastModified: new Date(),
             changeFrequency: "monthly" as const,
             priority: 0.6,
           })),
+          ...combos.map((combo) => ({
+            url: `${SITE_URL}/profissionais/${combo.categoriaSlug}/${combo.cidadeSlug}`,
+            lastModified: new Date(),
+            changeFrequency: "weekly" as const,
+            priority: 0.65,
+          })),
         ]
       : []),
-    // Add city/category landing pages here as they're built
-    // (programmatic SEO: /animadores/lisboa, /magicos/porto, etc.)
+    // Programmatic SEO: /profissionais/[categoria]/[cidade] pages are
+    // generated automatically above, one per category+city combination
+    // that has at least one real profile.
   ];
 }

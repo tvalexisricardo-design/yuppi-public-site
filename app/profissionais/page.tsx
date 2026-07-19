@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { Reveal } from "@/components/Reveal";
+import { Suspense } from "react";
 import { ConfettiField } from "@/components/Confetti";
+import { ProfessionalsFilter } from "@/components/ProfessionalsFilter";
 import { getAllProfiles } from "@/lib/professionals";
 import { SHOW_PROFISSIONAIS } from "@/lib/featureFlags";
 
@@ -35,42 +34,9 @@ export default function ProfissionaisIndexPage() {
           {profiles.length === 0 ? (
             <p className="text-inkSoft">Ainda não há profissionais publicados.</p>
           ) : (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {profiles.map((p, i) => (
-                <Reveal key={p.slug} delay={i * 80}>
-                  <Link
-                    href={`/profissionais/${p.slug}`}
-                    className="block h-full overflow-hidden rounded-xl2 bg-canvasSoft shadow-card transition-transform hover:scale-[1.01]"
-                  >
-                    {p.coverImage && (
-                      <div className="relative aspect-square w-full">
-                        <Image
-                          src={p.coverImage}
-                          alt={p.nome}
-                          fill
-                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-                    <div className="px-6 py-6">
-                      <p className="text-xs font-medium uppercase tracking-wide text-violet">
-                        {p.categoria} · {p.cidade}
-                      </p>
-                      <h2 className="mt-2 font-display text-lg font-medium text-ink">
-                        {p.nome}
-                      </h2>
-                      <p className="mt-1.5 text-sm text-inkSoft">{p.resumo}</p>
-                      {p.precoDesde && (
-                        <p className="mt-3 text-sm font-semibold text-ink">
-                          Desde {p.precoDesde} €
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
-            </div>
+            <Suspense fallback={<div className="h-48" />}>
+              <ProfessionalsFilter profiles={profiles} />
+            </Suspense>
           )}
         </div>
       </section>

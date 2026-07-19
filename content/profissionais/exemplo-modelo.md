@@ -1,7 +1,12 @@
 ---
 nome: "Exemplo — apaga ou edita este ficheiro"
-categoria: "Mágicos"
-cidade: "Lisboa"
+categorias:
+  - "Mágicos"
+  - "Pinturas Faciais"
+  - "Animadores"
+localidades:
+  - "Lisboa"
+  - "Setúbal"
 precoDesde: "150"
 resumo: "Uma frase curta e apelativa sobre o profissional, para aparecer nos cartões de listagem."
 coverImage: "/profissionais/exemplo/capa.jpg"
