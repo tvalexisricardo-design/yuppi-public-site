@@ -42,6 +42,7 @@ export function Footer() {
               Famílias
             </h3>
             <ul className="mt-4 space-y-3 text-sm text-inkSoft">
+              <li><Link href="/sobre-nos" className="hover:text-ink">Sobre Nós</Link></li>
               <li><Link href="/#como-funciona" className="hover:text-ink">Como funciona</Link></li>
               <li><Link href="/categorias" className="hover:text-ink">Categorias</Link></li>
               {SHOW_PROFISSIONAIS && (
