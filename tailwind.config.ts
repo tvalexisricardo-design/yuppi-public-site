@@ -1,17 +1,16 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
   ],
+
   // Defense-in-depth: Tailwind's content scanner can silently miss files
-  // inside dynamic route folders like app/blog/[slug]/. The base prose
-  // classes are safelisted so the typography plugin's output is never
-  // dropped; actual spacing is set with explicit arbitrary-variant
-  // selectors in components/BlogArticleContent.tsx, which don't depend on
-  // this safelist at all.
+  // inside dynamic route folders like app/blog/[slug]/.
   safelist: [{ pattern: /^prose(-\w+)?$/ }],
+
   theme: {
     extend: {
       colors: {
@@ -37,23 +36,28 @@ const config: Config = {
           light: "#FCEEDA",
         },
       },
+
       fontFamily: {
         display: ["var(--font-fraunces)", "Georgia", "serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
+
       maxWidth: {
         content: "1180px",
       },
+
       borderRadius: {
         xl2: "1.25rem",
       },
+
       boxShadow: {
         soft: "0 20px 60px -20px rgba(28, 16, 48, 0.18)",
         card: "0 8px 30px -12px rgba(28, 16, 48, 0.12)",
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+
+  plugins: [typography],
 };
 
 export default config;

@@ -6,12 +6,13 @@ categorias:
   - "K-Pop"
 localidades:
   - "Lisboa"
+  - "Cascais"
+  - "Sintra"
   - "Setúbal"
 precoDesde: "400"
 resumo: "Um espetáculo inspirado no universo K-Pop com animação, jogos, pinturas faciais, balões e muita interação para uma festa inesquecível."
-coverImage: "/profissionais/guerreiras-kpop/capa.jpg"
+coverImage: "/profissionais/guerreiras-kpop/capa.jpeg"
 fotos:
-  - "/profissionais/guerreiras-kpop/foto1.jpg"
 youtube: ""
 ---
 
