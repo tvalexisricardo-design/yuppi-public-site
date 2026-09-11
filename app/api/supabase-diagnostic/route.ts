@@ -1,7 +1,7 @@
 import dns from "node:dns/promises";
 
 export async function GET() {
-  const url = process.env.SUPABASE_URL;
+  const url = "https://jrkwcagcsfkrromwnzay.supabase.co";
   const key = process.env.SUPABASE_SECRET_KEY;
 
   if (!url) {
