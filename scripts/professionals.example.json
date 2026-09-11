@@ -1,0 +1,11 @@
+[
+  {
+    "nome": "Nome do profissional",
+    "website": "https://exemplo.pt",
+    "categorias": ["Mágicos"],
+    "localidades": ["Lisboa"],
+    "resumo": "Descrição original e curta escrita para a Yuppi.",
+    "precoDesde": "",
+    "fonte": "website oficial"
+  }
+]

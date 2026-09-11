@@ -1,0 +1,9 @@
+# One public professional/business URL per line.
+# The scraper only collects page metadata and proposes candidates; it does not publish them.
+https://www.ludimagia.pt/
+https://www.animarte.pt/
+https://www.rsfun.pt/
+https://roda-viva.pt/
+https://www.magicodascriancas.com/
+https://www.magicotiagosome.pt/
+https://www.magicopaulo.pt/
